@@ -1,0 +1,523 @@
+/* ==================== COLOR VARIABLES ==================== */
+:root {
+  --primary-bg: #F4ECDD;
+  --secondary-bg: #E8D9C4;
+  --accent-light: #D9C7A5;
+  --card-bg: #F7F2E9;
+  --text-dark: #3E2F1C;
+  --accent-dark: #8C6F4E;
+  --text-light: #6B5D4F;
+  --border-color: #E0D4C1;
+}
+
+/* ==================== GENERAL STYLES ==================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+  margin-top: 70px; /* navbar fixed top */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==================== NAVBAR ==================== */
+.bg-navbar {
+  background-color: var(--card-bg) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Ensure navbar is fully opaque and above content */
+.navbar,
+.bg-navbar {
+  /* Force fully opaque navbar using explicit rgba to avoid translucency */
+  background-color: rgba(247,242,233,1) !important; /* var(--card-bg) */
+  backdrop-filter: none !important;
+  opacity: 1 !important;
+  z-index: 1030;
+  background-image: none !important;
+}
+
+/* Ensure collapsed mobile menu is also opaque */
+.navbar .navbar-collapse {
+  background-color: rgba(247,242,233,1) !important;
+}
+
+/* Toggler background should remain subtle but opaque on mobile */
+.navbar .navbar-toggler {
+  background-color: transparent !important;
+}
+
+/* ==================== BOTTOM NAV (mobile-app style) ==================== */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  background: linear-gradient(90deg, rgba(247,242,233,1), rgba(233,221,204,1));
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1040;
+}
+.bottom-nav a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bottom-nav a .bn-icon {
+  font-size: 1.3rem;
+}
+.bottom-nav a.active {
+  color: var(--accent-dark);
+}
+
+/* Hide top navbar to mimic single-app navigation; keep for large screens if needed */
+.bg-navbar { display: none !important; }
+
+/* Ensure main content doesn't overlap bottom nav */
+.main-content { padding-bottom: 110px; }
+
+.navbar-brand {
+  color: var(--accent-dark) !important;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: var(--text-light) !important;
+  font-weight: 500;
+  margin: 0 8px;
+  transition: color 0.3s ease;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+  color: var(--accent-dark) !important;
+}
+
+/* ==================== MAIN CONTENT ==================== */
+.main-content {
+  min-height: calc(100vh - 70px - 80px);
+  padding-bottom: 40px;
+}
+
+/* ==================== HERO SECTION ==================== */
+.hero-section {
+  background: linear-gradient(135deg, var(--card-bg) 0%, var(--secondary-bg) 100%);
+  border-radius: 16px;
+  margin-bottom: 30px;
+  padding: 50px 20px !important;
+}
+
+.hero-section h1 {
+  color: var(--text-dark);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.hero-section .lead {
+  color: var(--text-light);
+  font-size: 1.1rem;
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-main {
+  min-height: auto;
+}
+
+.card-feature {
+  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(217, 199, 165, 0.3) 100%);
+  cursor: pointer;
+  color: var(--text-dark);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid transparent;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-feature:hover {
+  border-color: var(--accent-dark);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(140, 111, 78, 0.15);
+}
+
+.card-feature .feature-icon {
+  font-size: 3rem;
+  transition: transform 0.3s ease;
+}
+
+.card-feature:hover .feature-icon {
+  transform: scale(1.1);
+}
+
+.card-stat {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-light) 100%);
+  text-align: center;
+  padding: 20px;
+}
+
+.card-stat .stat-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.card-stat .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.card-title {
+  color: var(--text-dark);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+/* ==================== FORMS ==================== */
+.form-label {
+  color: var(--text-dark);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.form-control,
+.form-select {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  color: var(--text-dark);
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent-dark);
+  box-shadow: 0 0 0 0.2rem rgba(140, 111, 78, 0.15);
+  background-color: #FFFFFF;
+}
+
+.form-control::placeholder {
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+
+.btn-primary {
+  background-color: var(--accent-dark);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #7A5D42;
+  box-shadow: 0 6px 16px rgba(140, 111, 78, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-light {
+  background-color: var(--secondary-bg);
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+}
+
+.btn-light:hover,
+.btn-light:focus {
+  background-color: var(--accent-light);
+  color: var(--text-dark);
+}
+
+.btn-danger {
+  background-color: #D9534F;
+}
+
+.btn-danger:hover {
+  background-color: #C9302C;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==================== ALERTS & BADGES ==================== */
+.alert {
+  background-color: var(--secondary-bg);
+  color: var(--text-dark);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.alert-light {
+  background-color: #FFFFFF;
+  color: var(--text-dark);
+}
+
+.badge {
+  background-color: var(--accent-dark);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* ==================== MODAL ==================== */
+.modal-content {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.modal-header {
+  background-color: var(--secondary-bg);
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-title {
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.btn-close {
+  opacity: 0.7;
+}
+
+/* ==================== TIMER STYLES ==================== */
+.timer-clock-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.digital-display {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--accent-dark);
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  letter-spacing: 4px;
+}
+
+/* Make the timer canvas look like a circular, styled clock */
+#timerCanvas {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.6), transparent 25%), linear-gradient(180deg, var(--card-bg), var(--secondary-bg));
+  box-shadow: 0 10px 30px rgba(62,47,28,0.12), inset 0 2px 6px rgba(255,255,255,0.4);
+}
+
+/* ==================== GALLERY ==================== */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  aspect-ratio: 1 / 1;
+  background-color: var(--secondary-bg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+/* ==================== TABLE STYLES ==================== */
+.table {
+  background-color: var(--card-bg);
+  border-collapse: collapse;
+}
+
+.table thead {
+  background-color: var(--secondary-bg);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.table thead th {
+  color: var(--text-dark);
+  font-weight: 700;
+  padding: 14px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-dark);
+}
+
+.table tbody tr:hover {
+  background-color: rgba(217, 199, 165, 0.2);
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+  background-color: var(--secondary-bg);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  body {
+    margin-top: 60px;
+  }
+
+  .hero-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .digital-display {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+
+  .card-body {
+    padding: 16px;
+  }
+
+  .navbar-collapse {
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 10px 0;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 8px 12px !important;
+    margin: 4px 0 !important;
+  }
+}
+
+/* ==================== UTILITY CLASSES ==================== */
+.text-dark {
+  color: var(--text-dark) !important;
+}
+
+.text-light {
+  color: var(--text-light) !important;
+}
+
+.text-muted {
+  color: var(--text-light) !important;
+}
+
+.bg-primary-bg {
+  background-color: var(--primary-bg);
+}
+
+.bg-secondary-bg {
+  background-color: var(--secondary-bg);
+}
+
+.bg-card {
+  background-color: var(--card-bg);
+}
+
+.border-light {
+  border-color: var(--border-color) !important;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+/* ==================== CHARTS ==================== */
+#volumeChart,
+#maxWeightChart,
+#maxRepsChart {
+  max-height: 300px;
+}
