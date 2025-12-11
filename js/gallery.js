@@ -37,8 +37,13 @@ async function uploadPhoto() {
   const file = photoFile.files[0];
   
   // Validate file type
-  if (!file.type.startsWith('image/')) {
-    showToast('File harus berupa gambar', 'error');
+  // Validate file type (some browsers may leave type blank for HEIC)
+  const allowedExt = /\.(png|jpe?g|heic)$/i;
+  const isImageType = file.type && file.type.startsWith('image/');
+  const hasAllowedExt = allowedExt.test(file.name || '');
+
+  if (!isImageType && !hasAllowedExt) {
+    showToast('File harus berupa gambar (PNG/JPG/HEIC)', 'error');
     return;
   }
 
@@ -49,7 +54,8 @@ async function uploadPhoto() {
       data: base64,
       note: photoNote?.value || '',
       date: new Date().toISOString(),
-      filename: file.name
+      filename: file.name,
+      mime: file.type || ''
     };
 
     storage.addPhoto(photo);
