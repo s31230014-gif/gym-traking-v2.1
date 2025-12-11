@@ -37,10 +37,22 @@ html {
 /* Ensure navbar is fully opaque and above content */
 .navbar,
 .bg-navbar {
-  background-color: var(--card-bg) !important;
+  /* Force fully opaque navbar using explicit rgba to avoid translucency */
+  background-color: rgba(247,242,233,1) !important; /* var(--card-bg) */
   backdrop-filter: none !important;
   opacity: 1 !important;
   z-index: 1030;
+  background-image: none !important;
+}
+
+/* Ensure collapsed mobile menu is also opaque */
+.navbar .navbar-collapse {
+  background-color: rgba(247,242,233,1) !important;
+}
+
+/* Toggler background should remain subtle but opaque on mobile */
+.navbar .navbar-toggler {
+  background-color: transparent !important;
 }
 
 .navbar-brand {
