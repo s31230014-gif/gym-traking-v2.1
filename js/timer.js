@@ -68,14 +68,21 @@ function drawClock() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Background circle
-  ctx.fillStyle = '#F7F2E9';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Outer circle
-  ctx.strokeStyle = '#8C6F4E';
-  ctx.lineWidth = 3;
+  // Circular background with subtle inner shadow
+  const grad = ctx.createRadialGradient(centerX - radius*0.2, centerY - radius*0.25, radius*0.1, centerX, centerY, radius);
+  grad.addColorStop(0, '#FFFFFF');
+  grad.addColorStop(0.25, '#F7F2E9');
+  grad.addColorStop(1, '#E8D9C4');
+  ctx.fillStyle = grad;
   ctx.beginPath();
-  ctx.arc(centerX, centerY, radius - 10, 0, Math.PI * 2);
+  ctx.arc(centerX, centerY, radius - 2, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Outer ring
+  ctx.strokeStyle = '#8C6F4E';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, radius - 12, 0, Math.PI * 2);
   ctx.stroke();
 
   // Center dot
@@ -99,21 +106,33 @@ function drawClock() {
     ctx.stroke();
   }
 
-  // Calculate hand positions
+  // Draw progress arc instead of a single thick hand
   const initialTime = getInitialTime();
-  const progress = initialTime > 0 ? timeLeft / initialTime : 0;
-  const angle = progress * Math.PI * 2 - Math.PI / 2;
+  const progress = initialTime > 0 ? (initialTime - timeLeft) / initialTime : 0;
+  const startAngle = -Math.PI / 2;
+  const endAngle = startAngle + progress * Math.PI * 2;
 
-  // Hand (second hand style)
-  ctx.strokeStyle = '#E8D9C4';
-  ctx.lineWidth = 6;
+  // Background arc
   ctx.beginPath();
-  ctx.moveTo(centerX, centerY);
-  ctx.lineTo(
-    centerX + (radius - 20) * Math.cos(angle),
-    centerY + (radius - 20) * Math.sin(angle)
-  );
+  ctx.strokeStyle = 'rgba(62,47,28,0.12)';
+  ctx.lineWidth = 12;
+  ctx.lineCap = 'round';
+  ctx.arc(centerX, centerY, radius - 40, startAngle, startAngle + Math.PI * 2);
   ctx.stroke();
+
+  // Foreground progress arc
+  ctx.beginPath();
+  ctx.strokeStyle = '#8C6F4E';
+  ctx.lineWidth = 12;
+  ctx.lineCap = 'round';
+  ctx.arc(centerX, centerY, radius - 40, startAngle, endAngle);
+  ctx.stroke();
+
+  // Small center dot
+  ctx.fillStyle = '#8C6F4E';
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, 6, 0, Math.PI * 2);
+  ctx.fill();
 
   // Numbers
   ctx.fillStyle = '#3E2F1C';
