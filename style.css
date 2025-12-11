@@ -34,6 +34,15 @@ html {
   border-bottom: 1px solid var(--border-color);
 }
 
+/* Ensure navbar is fully opaque and above content */
+.navbar,
+.bg-navbar {
+  background-color: var(--card-bg) !important;
+  backdrop-filter: none !important;
+  opacity: 1 !important;
+  z-index: 1030;
+}
+
 .navbar-brand {
   color: var(--accent-dark) !important;
   font-size: 1.3rem;
@@ -287,6 +296,17 @@ html {
   font-family: 'Courier New', monospace;
   text-align: center;
   letter-spacing: 4px;
+}
+
+/* Make the timer canvas look like a circular, styled clock */
+#timerCanvas {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.6), transparent 25%), linear-gradient(180deg, var(--card-bg), var(--secondary-bg));
+  box-shadow: 0 10px 30px rgba(62,47,28,0.12), inset 0 2px 6px rgba(255,255,255,0.4);
 }
 
 /* ==================== GALLERY ==================== */
