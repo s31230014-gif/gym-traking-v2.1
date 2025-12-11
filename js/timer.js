@@ -85,11 +85,6 @@ function drawClock() {
   ctx.arc(centerX, centerY, radius - 12, 0, Math.PI * 2);
   ctx.stroke();
 
-  // Center dot
-  ctx.fillStyle = '#8C6F4E';
-  ctx.beginPath();
-  ctx.arc(centerX, centerY, 6, 0, Math.PI * 2);
-  ctx.fill();
 
   // Hour markers
   ctx.strokeStyle = '#8C6F4E';
@@ -128,11 +123,18 @@ function drawClock() {
   ctx.arc(centerX, centerY, radius - 40, startAngle, endAngle);
   ctx.stroke();
 
-  // Small center dot
-  ctx.fillStyle = '#8C6F4E';
+  // Draw a thin hand (jarum) pointing to the current endAngle for familiarity
+  const handLength = radius - 60;
+  const handAngle = endAngle; // points where the progress ends
   ctx.beginPath();
-  ctx.arc(centerX, centerY, 6, 0, Math.PI * 2);
-  ctx.fill();
+  ctx.strokeStyle = '#3E2F1C';
+  ctx.lineWidth = 4;
+  ctx.lineCap = 'round';
+  ctx.moveTo(centerX, centerY);
+  ctx.lineTo(centerX + handLength * Math.cos(handAngle), centerY + handLength * Math.sin(handAngle));
+  ctx.stroke();
+
+  // (removed center dot to avoid obstructing numbers)
 
   // Numbers
   ctx.fillStyle = '#3E2F1C';
